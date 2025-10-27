@@ -1,0 +1,34 @@
+/* src/index.css */
+body, html, #root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #000;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+  }
+  
+  main {
+    min-height: 100vh;
+    padding-top: 60px;
+  }
+  
+  .structure3d-container {
+    animation: fadeIn 2s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  body, html, #root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #000;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+  }
+  

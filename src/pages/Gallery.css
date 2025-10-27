@@ -1,0 +1,226 @@
+/* Classic, minimal, chic styling */
+
+.gallery-page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    font-family: "Crimson Text", "Garamond", "Georgia", serif;
+    color: #2a2a2a;
+    background: #fafaf8;
+  }
+  
+  /* ===== HEADER ===== */
+  .gallery-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 2rem;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    margin: 0 0 1rem 0;
+    color: #1a1a1a;
+  }
+  
+  .subtitle {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #666;
+    font-weight: 300;
+    margin: 0;
+  }
+  
+  /* ===== REVEAL TOGGLE ===== */
+  .reveal-toggle {
+    display: block;
+    margin: 0 auto 3rem;
+    padding: 0.75rem 2rem;
+    background: transparent;
+    border: 1px solid #2a2a2a;
+    color: #2a2a2a;
+    font-family: inherit;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: lowercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .reveal-toggle:hover {
+    background: #2a2a2a;
+    color: #fafaf8;
+  }
+  
+  /* ===== GALLERY GRID ===== */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .gallery-item {
+    cursor: pointer;
+    transition: all 0.4s ease;
+    opacity: 0.9;
+  }
+  
+  .gallery-item:hover {
+    opacity: 1;
+  }
+  
+  .gallery-item.active .image-container {
+    opacity: 0.75;
+  }
+  
+  .gallery-item.playing .image-container {
+    opacity: 1;
+  }
+  
+  /* ===== IMAGE CONTAINER ===== */
+  .image-container {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    margin-bottom: 1rem;
+    transition: opacity 0.4s ease;
+  }
+  
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.4s ease;
+  }
+  
+  .gallery-item:hover .image-overlay {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  
+  /* ===== AUDIO INDICATOR ===== */
+  .audio-indicator {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    color: #2a2a2a;
+    animation: pulse 1.5s ease-in-out infinite;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+  
+  /* ===== TEXT ===== */
+  .image-text {
+    text-align: center;
+    padding: 0 1rem;
+  }
+  
+  .poem {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #3a3a3a;
+    margin: 0 0 1rem 0;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+  
+  .hidden-data {
+    font-size: 0.9rem;
+    color: #888;
+    font-style: normal;
+    margin: 1rem 0 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid #e8e8e8;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* ===== FOOTER ===== */
+  .gallery-footer {
+    text-align: center;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  .gallery-footer p {
+    font-size: 0.95rem;
+    color: #888;
+    line-height: 1.8;
+    margin: 0;
+  }
+  
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1200px) {
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .gallery-page {
+      padding: 3rem 1.5rem;
+    }
+  
+    h1 {
+      font-size: 2.2rem;
+    }
+  
+    .subtitle {
+      font-size: 1rem;
+    }
+  
+    .gallery-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  
+    .image-text {
+      padding: 0 0.5rem;
+    }
+  
+    .poem {
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.8rem;
+    }
+  
+    .poem {
+      font-size: 1rem;
+    }
+  
+    .audio-indicator {
+      font-size: 1.5rem;
+    }
+  }
+  
