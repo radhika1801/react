@@ -1,226 +1,203 @@
-/* Classic, minimal, chic styling */
+.gallery {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #0a0e27, #151a33 40%, #0a0e27);
+  padding: 0;
+  position: relative;
+  overflow-x: hidden;
+}
 
-.gallery-page {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 4rem 2rem;
-    font-family: "Crimson Text", "Garamond", "Georgia", serif;
-    color: #2a2a2a;
-    background: #fafaf8;
+.gallery-hero {
+  text-align: center;
+  padding: 4rem 2rem 3rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-family: 'Super-Sliced', monospace;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 400;
+  color: #fafaf8;
+  margin: 0 0 1rem;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+}
+
+.hero-subtitle {
+  font-family: 'Eros', Georgia, serif;
+  font-size: clamp(0.7rem, 1.75vw, 1.1rem);
+  color: #f5f5dc;
+  font-style: italic;
+  font-weight: 300;
+  margin: 0 0 1.5rem;
+}
+
+.hero-divider {
+  display: block;
+  width: 70px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #d4af37, transparent);
+  margin: 0 auto 1.5rem;
+}
+
+.hero-hint {
+  font-family: 'Eros', Georgia, serif;
+  font-size: 1.05rem;
+  color: rgba(212, 175, 55, 0.6);
+  letter-spacing: 0.15em;
+  margin: 0;
+}
+
+.gallery-container {
+  position: relative;
+  width: 100%;
+  min-height: 180vh;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 3rem 2rem 8rem;
+}
+
+/* CARD */
+.card {
+  position: absolute;
+  cursor: pointer;
+  width: 350px;
+  z-index: 1;
+  perspective: 1000px;
+}
+
+/* NUMBER BOX - Yellow border and yellow number, always straight */
+.card-number-box {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  border: 2px solid #d4af37;
+  color: #d4af37;
+  background-color: transparent;
+  padding: 4px 10px;
+  font-family: 'Super-Sliced', monospace;
+  font-size: 1rem;
+  font-weight: 400;
+  z-index: 10;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 120%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+  cursor: pointer;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-visual {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  box-shadow: 0 1px 0 rgba(212,175,55,0.2), 0 20px 60px rgba(0,0,0,0.6);
+  backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* AUDIO NOTE - Top right inside the oval */
+.audio-pulse {
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  font-size: 2.5rem;
+  color: #d4af37;
+  text-shadow: 0 0 20px #d4af37, 0 0 40px rgba(212,175,55,0.6);
+  animation: pulse 1.4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 0.6; 
+    transform: scale(1); 
   }
-  
-  /* ===== HEADER ===== */
-  .gallery-header {
-    text-align: center;
-    margin-bottom: 4rem;
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 2rem;
+  50% { 
+    opacity: 1; 
+    transform: scale(1.15); 
   }
-  
-  h1 {
-    font-size: 3rem;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    margin: 0 0 1rem 0;
-    color: #1a1a1a;
+}
+
+/* TEXT BELOW IMAGE WHEN FLIPPED - always straight */
+.card-text-container {
+  text-align: center;
+  margin-top: 1rem;
+  pointer-events: none;
+}
+
+.text-title { 
+  color: #d4af37; 
+  font-family: 'Super-Sliced', monospace; 
+  font-size: 0.95rem; 
+  margin: 0 0 0.3rem; 
+}
+
+.text-verse { 
+  color: #e8dcc4; 
+  font-family: 'Eros', Georgia, serif; 
+  font-size: 1.2rem; 
+  margin: 0; 
+}
+
+@media (max-width: 768px) {
+  .card { 
+    width: 300px; 
   }
-  
-  .subtitle {
-    font-size: 1.1rem;
-    font-style: italic;
-    color: #666;
-    font-weight: 300;
-    margin: 0;
+  .card-number-box { 
+    font-size: 0.9rem; 
+    top: 12px; 
+    left: 12px; 
+    padding: 3px 8px;
   }
-  
-  /* ===== REVEAL TOGGLE ===== */
-  .reveal-toggle {
-    display: block;
-    margin: 0 auto 3rem;
-    padding: 0.75rem 2rem;
-    background: transparent;
-    border: 1px solid #2a2a2a;
-    color: #2a2a2a;
-    font-family: inherit;
-    font-size: 0.9rem;
-    letter-spacing: 0.1em;
-    text-transform: lowercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .reveal-toggle:hover {
-    background: #2a2a2a;
-    color: #fafaf8;
-  }
-  
-  /* ===== GALLERY GRID ===== */
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 2.5rem;
-    margin-bottom: 3rem;
-  }
-  
-  .gallery-item {
-    cursor: pointer;
-    transition: all 0.4s ease;
-    opacity: 0.9;
-  }
-  
-  .gallery-item:hover {
-    opacity: 1;
-  }
-  
-  .gallery-item.active .image-container {
-    opacity: 0.75;
-  }
-  
-  .gallery-item.playing .image-container {
-    opacity: 1;
-  }
-  
-  /* ===== IMAGE CONTAINER ===== */
-  .image-container {
-    width: 100%;
-    aspect-ratio: 4/3;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    margin-bottom: 1rem;
-    transition: opacity 0.4s ease;
-  }
-  
-  .image-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0);
-    transition: background 0.4s ease;
-  }
-  
-  .gallery-item:hover .image-overlay {
-    background: rgba(0, 0, 0, 0.05);
-  }
-  
-  /* ===== AUDIO INDICATOR ===== */
-  .audio-indicator {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+  .audio-pulse { 
     font-size: 2rem;
-    color: #2a2a2a;
-    animation: pulse 1.5s ease-in-out infinite;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    top: 12%;
+    right: 12%;
   }
-  
-  @keyframes pulse {
-    0%, 100% {
-      opacity: 0.6;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 1;
-      transform: scale(1.1);
-    }
+}
+
+@media (max-width: 480px) {
+  .card { 
+    width: 260px; 
   }
-  
-  /* ===== TEXT ===== */
-  .image-text {
-    text-align: center;
-    padding: 0 1rem;
+  .card-number-box { 
+    font-size: 0.85rem; 
+    top: 10px; 
+    left: 10px; 
+    padding: 2px 6px;
   }
-  
-  .poem {
-    font-size: 1.2rem;
-    font-style: italic;
-    color: #3a3a3a;
-    margin: 0 0 1rem 0;
-    line-height: 1.8;
-    font-weight: 300;
+  .card-inner { 
+    padding-bottom: 130%; 
   }
-  
-  .hidden-data {
-    font-size: 0.9rem;
-    color: #888;
-    font-style: normal;
-    margin: 1rem 0 0 0;
-    padding-top: 1rem;
-    border-top: 1px solid #e8e8e8;
-    animation: fadeIn 0.5s ease;
+  .audio-pulse { 
+    font-size: 1.8rem;
+    top: 10%;
+    right: 10%;
   }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .text-title { 
+    font-size: 0.85rem; 
   }
-  
-  /* ===== FOOTER ===== */
-  .gallery-footer {
-    text-align: center;
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid #e0e0e0;
+  .text-verse { 
+    font-size: 1.1rem; 
   }
-  
-  .gallery-footer p {
-    font-size: 0.95rem;
-    color: #888;
-    line-height: 1.8;
-    margin: 0;
-  }
-  
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 1200px) {
-    .gallery-grid {
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .gallery-page {
-      padding: 3rem 1.5rem;
-    }
-  
-    h1 {
-      font-size: 2.2rem;
-    }
-  
-    .subtitle {
-      font-size: 1rem;
-    }
-  
-    .gallery-grid {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-  
-    .image-text {
-      padding: 0 0.5rem;
-    }
-  
-    .poem {
-      font-size: 1.1rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    h1 {
-      font-size: 1.8rem;
-    }
-  
-    .poem {
-      font-size: 1rem;
-    }
-  
-    .audio-indicator {
-      font-size: 1.5rem;
-    }
-  }
-  
+}

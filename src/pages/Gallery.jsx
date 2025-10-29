@@ -9,150 +9,125 @@ import img5 from "../assets/5.jpeg";
 import img6 from "../assets/6.jpeg";
 import img7 from "../assets/7.jpeg";
 
+import img1_back from "../assets/1.1.jpg";
+import img2_back from "../assets/2.1.jpg";
+import img3_back from "../assets/3.1.jpg";
+import img4_back from "../assets/4.1.jpg";
+import img5_back from "../assets/5.1.jpg";
+import img6_back from "../assets/6.1.jpg";
+import img7_back from "../assets/7.1.jpg";
+
 export default function Gallery() {
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [showData, setShowData] = useState(false);
-  const [playingAudio, setPlayingAudio] = useState(null);
+  const [flippedCards, setFlippedCards] = useState({});
+  const [audioPlaying, setAudioPlaying] = useState(null);
   const audioRefs = useRef({});
 
-  const images = [
-    {
-      id: 1,
-      src: img1,
-      poem: "Where morning light meets murky waters",
-      hidden: "720 microplastic fragments per cubic meter",
-      // Replace with your own audio files in /assets/audio/
-      audio: "https://assets.mixkit.co/active_storage/sfx/2462/2462-preview.mp3",
-    },
-    {
-      id: 2,
-      src: img2,
-      poem: "Invisible threads woven through the river",
-      hidden: "510 polymer fibers drift unseen",
-      audio: "https://assets.mixkit.co/active_storage/sfx/2889/2889-preview.mp3",
-    },
-    {
-      id: 3,
-      src: img3,
-      poem: "Quiet waters hold quiet secrets",
-      hidden: "280 particles suspended in stillness",
-      audio: "https://assets.mixkit.co/active_storage/sfx/2460/2460-preview.mp3",
-    },
-    {
-      id: 4,
-      src: img4,
-      poem: "The river remembers what we forget",
-      hidden: "1150 fragments of yesterday's choices",
-      audio: "https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3",
-    },
-    {
-      id: 5,
-      src: img5,
-      poem: "Between bridges, between worlds",
-      hidden: "590 pieces of the city dissolve",
-      audio: "https://assets.mixkit.co/active_storage/sfx/2463/2463-preview.mp3",
-    },
-    {
-      id: 6,
-      src: img6,
-      poem: "Urban flow carries more than water",
-      hidden: "840 invisible witnesses",
-      audio: "https://assets.mixkit.co/active_storage/sfx/2017/2017-preview.mp3",
-    },
-    {
-      id: 7,
-      src: img7,
-      poem: "Even beauty bears the weight",
-      hidden: "150 particles in paradise",
-      audio: "https://assets.mixkit.co/active_storage/sfx/2469/2469-preview.mp3",
-    },
+  const content = [
+    { id: 1, src: img1, backSrc: img1_back, title: "go outside. stand still.", verse: "hold the day like a warm cup.", audio: "/src/assets/audio/river1.mp3", size: 1 },
+    { id: 2, src: img2, backSrc: img2_back, title: "observe the invisible", verse: "do not blink. swallow slowly.", audio: "/src/assets/audio/river2.mp3", size: 0.9 },
+    { id: 3, src: img3, backSrc: img3_back, title: "morning ritual", verse: "your daily cup by the river.", audio: "/src/assets/audio/river3.mp3", size: 1.1 },
+    { id: 4, src: img4, backSrc: img4_back, title: "the river speaks", verse: "imagine each fragment as a message.", audio: "/src/assets/audio/river4.mp3", size: 0.85 },
+    { id: 5, src: img5, backSrc: img5_back, title: "hold a cup of water", verse: "now imagine it holding you back.", audio: "/src/assets/audio/river5.mp3", size: 1 },
+    { id: 6, src: img6, backSrc: img6_back, title: "transformation", verse: "visible pollution breaks into invisible fragments.", audio: "/src/assets/audio/river6.mp3", size: 0.9 },
+    { id: 7, src: img7, backSrc: img7_back, title: "look at the East River", verse: "see it looking back at you.", audio: "/src/assets/audio/river7.mp3", size: 1.05 },
   ];
 
-  const handleImageClick = (id) => {
-    // Toggle selection
-    setSelectedImage(selectedImage === id ? null : id);
-    
-    // Play audio
-    const currentAudio = audioRefs.current[id];
-    
-    // Stop all other audio
+  // Strategically scattered positions with extra spacing
+  const positions = [
+    { top: "1%", left: "10%", rotation: -10 },
+    { top: "8%", left: "45%", rotation: 5 },
+    { top: "30%", left: "70%", rotation: 10 },
+    { top: "35%", left: "10%", rotation: 8 },
+    { top: "40%", left: "40%", rotation: -12 },
+    { top: "65%", left: "20%", rotation: 12 },
+    { top: "65%", left: "65%", rotation: -8 },
+  ];
+
+  const toggleCard = (id) => {
+    setFlippedCards(prev => ({ ...prev, [id]: !prev[id] }));
+
+    const audio = audioRefs.current[id];
+
     Object.keys(audioRefs.current).forEach((key) => {
-      if (key !== id.toString() && audioRefs.current[key]) {
-        audioRefs.current[key].pause();
-        audioRefs.current[key].currentTime = 0;
+      const keyAudio = audioRefs.current[key];
+      if (keyAudio && parseInt(key) !== id) {
+        keyAudio.pause();
+        keyAudio.currentTime = 0;
       }
     });
 
-    if (currentAudio) {
-      if (playingAudio === id) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-        setPlayingAudio(null);
+    if (audio) {
+      if (audioPlaying === id) {
+        audio.pause();
+        audio.currentTime = 0;
+        setAudioPlaying(null);
       } else {
-        currentAudio.play();
-        setPlayingAudio(id);
+        audio.play();
+        setAudioPlaying(id);
       }
     }
   };
 
   return (
-    <div className="gallery-page">
-      <header className="gallery-header">
-        <h1>Invisible Rivers</h1>
-        <p className="subtitle">
-          What the eye cannot see, the river remembers
-        </p>
-      </header>
+    <div className="gallery">
+      <section className="gallery-hero">
+        <h1 className="hero-title">Interactive Archive</h1>
+        <p className="hero-subtitle">what the eye cannot see, the river remembers</p>
+        <span className="hero-divider"></span>
+        <p className="hero-hint">click · listen · reveal</p>
+      </section>
 
-      <button
-        className="reveal-toggle"
-        onClick={() => setShowData(!showData)}
-      >
-        {showData ? "hide the truth" : "reveal what's hidden"}
-      </button>
-
-      <div className="gallery-grid">
-        {images.map((img) => (
-          <div
-            key={img.id}
-            className={`gallery-item ${
-              selectedImage === img.id ? "active" : ""
-            } ${playingAudio === img.id ? "playing" : ""}`}
-            onClick={() => handleImageClick(img.id)}
+      <section className="gallery-container">
+        {content.map((item, index) => (
+          <article
+            key={item.id}
+            className={`card ${flippedCards[item.id] ? "flipped" : ""}`}
+            style={{
+              top: positions[index].top,
+              left: positions[index].left,
+              transform: `rotate(${positions[index].rotation}deg) scale(${item.size})`
+            }}
           >
-            <div
-              className="image-container"
-              style={{ backgroundImage: `url(${img.src})` }}
+            <div 
+              className="card-number-box"
+              style={{ transform: `rotate(${-positions[index].rotation}deg)` }}
             >
-              <div className="image-overlay"></div>
-              {playingAudio === img.id && (
-                <div className="audio-indicator">♪</div>
-              )}
+              {String(index + 1).padStart(2, '0')}
+            </div>
+            
+            <div className="card-inner" onClick={() => toggleCard(item.id)}>
+              <div
+                className="card-visual card-front"
+                style={{ backgroundImage: `url(${item.src})` }}
+              >
+                {audioPlaying === item.id && <div className="audio-pulse">♪</div>}
+              </div>
+              <div
+                className="card-visual card-back"
+                style={{ backgroundImage: `url(${item.backSrc})` }}
+              >
+                {audioPlaying === item.id && <div className="audio-pulse">♪</div>}
+              </div>
             </div>
 
-            <div className="image-text">
-              <p className="poem">{img.poem}</p>
-              {showData && selectedImage === img.id && (
-                <p className="hidden-data">{img.hidden}</p>
-              )}
-            </div>
+            {flippedCards[item.id] && (
+              <div 
+                className="card-text-container"
+                style={{ transform: `rotate(${-positions[index].rotation}deg)` }}
+              >
+                <h3 className="text-title">{item.title}</h3>
+                <p className="text-verse">{item.verse}</p>
+              </div>
+            )}
 
-            {/* Hidden audio element */}
             <audio
-              ref={(el) => (audioRefs.current[img.id] = el)}
-              src={img.audio}
-              onEnded={() => setPlayingAudio(null)}
+              ref={(el) => (audioRefs.current[item.id] = el)}
+              src={item.audio}
+              onEnded={() => setAudioPlaying(null)}
             />
-          </div>
+          </article>
         ))}
-      </div>
-
-      <footer className="gallery-footer">
-        <p>
-          Each image holds a story.<br />
-          Click to listen.
-        </p>
-      </footer>
+      </section>
     </div>
   );
 }
