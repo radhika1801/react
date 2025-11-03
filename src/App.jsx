@@ -15,10 +15,10 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/src/pages/research" element={<Research />} />
-          <Route path="/src/pages/gallery" element={<Gallery />} />
-          <Route path="/src/pages/map" element={<MapPage />} />
-          <Route path="/src/pages/structure" element={<Structure3D />} />
+          <Route path="/research" element={<Research />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/map" element={<MapPage />} />
+          <Route path="/structure" element={<Structure3D />} />
         </Routes>
       </main>
       <Footer />

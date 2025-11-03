@@ -75,28 +75,11 @@ export default function Navbar() {
           whileTap={{ scale: 0.95 }}
           className="explore-btn"
         >
-          <ScrollLink
-            to="contact"
-            smooth={true}
-            duration={600}
-            offset={-70}
-            className="explore-link"
-          >
-            <svg className="explore-icon" width="16" height="16" viewBox="0 0 16 16">
-              <ellipse cx="8" cy="8" rx="3" ry="6" fill="currentColor" transform="rotate(25 8 8)" />
-            </svg>
-          </ScrollLink>
+          
         </motion.div>
       </div>
 
-      {/* Mobile Menu Toggle */}
-      <button 
-        className="mobile-toggle"
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle menu"
-      >
-        <span className={`hamburger ${isOpen ? 'open' : ''}`}></span>
-      </button>
+      
 
       {/* Mobile Menu */}
       {isOpen && (

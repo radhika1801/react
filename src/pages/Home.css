@@ -1,0 +1,223 @@
+/* Home.css - Simplified Microplastics Page */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  color: #e8e6e3;
+  overflow-x: hidden;
+  cursor: none;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.microplastics-page {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #1a1d3a, #2c3e50);
+}
+
+/* Custom Cursor */
+#custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  mix-blend-mode: difference;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #e8e6e3;
+  border-radius: 50%;
+  position: absolute;
+  top: -4px;
+  left: -4px;
+}
+
+.cursor-ring {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #e8e6e3;
+  border-radius: 50%;
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  transition: all 0.15s ease-out;
+}
+
+[data-cursor="dissolve"] .cursor-ring {
+  width: 60px;
+  height: 60px;
+  top: -30px;
+  left: -30px;
+  border-color: #ffcc66;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.7; }
+}
+
+/* Microplastics Background */
+.microplastics {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.microplastic {
+  position: absolute;
+  pointer-events: all;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.microplastic.circle {
+  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 204, 102, 0.5);
+}
+
+.microplastic.shard {
+  width: 6px;
+  height: 3px;
+  background: rgba(232, 230, 227, 0.4);
+  transform: rotate(45deg);
+}
+
+.microplastic:hover {
+  opacity: 1;
+}
+
+/* Landing Page */
+.landing-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  z-index: 10;
+  transition: opacity 1s ease-out;
+}
+
+.landing-title {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Dank Mono', 'Source Code Pro', monospace;
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  color: #e8e6e3;
+  margin-bottom: 1rem;
+  transition: all 0.5s ease;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+}
+
+.landing-subtitle {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: #bb9256;
+  margin-bottom: 2rem;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.instruction-text {
+  font-size: 0.9rem;
+  color: rgba(232, 230, 227, 0.5);
+  animation: fade-pulse 2s infinite;
+}
+
+@keyframes fade-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+/* Dissolving Particles */
+.particle {
+  position: fixed;
+  background: #ffcc66;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.particle.dissolving {
+  animation: dissolve-float 4s ease-out forwards;
+}
+
+@keyframes dissolve-float {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-200px) scale(0.3);
+  }
+}
+
+/* Poem Page */
+.poem-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  z-index: 10;
+  animation: fadeIn 2s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.poem-text {
+  font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  line-height: 1.8;
+  color: #e8e6e3;
+  text-align: center;
+  max-width: 700px;
+  font-style: italic;
+}
+
+.poem-emphasis {
+  color: #ffcc66;
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .landing-title {
+    font-size: 2rem;
+  }
+
+  .landing-subtitle {
+    font-size: 1rem;
+  }
+
+  .poem-text {
+    font-size: 1.2rem;
+    padding: 0 1rem;
+  }
+}

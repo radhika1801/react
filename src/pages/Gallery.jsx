@@ -36,7 +36,7 @@ export default function Gallery() {
   const positions = [
     { top: "1%", left: "10%", rotation: -10 },
     { top: "8%", left: "45%", rotation: 5 },
-    { top: "30%", left: "70%", rotation: 10 },
+    { top: "32%", left: "70%", rotation: 10 },
     { top: "35%", left: "10%", rotation: 8 },
     { top: "40%", left: "40%", rotation: -12 },
     { top: "65%", left: "20%", rotation: 12 },
